@@ -1,4 +1,6 @@
-replicaCount: 2
+replicaCount: 1
+
+#
 
 image:
   repository: clecio/flask-api

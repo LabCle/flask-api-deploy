@@ -28,7 +28,7 @@ serviceAccount:
   name: "flask-api-sa"
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
   hosts:
     - host: flask-api.local

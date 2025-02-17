@@ -27,11 +27,23 @@ serviceAccount:
   create: true
   name: "flask-api-sa"
 
+# ingress:
+#   enabled: true
+#   annotations: {}
+#   hosts:
+#     - host: flask-api.local
+#       paths:
+#         - path: /
+#           pathType: Prefix
+#   tls: []
+
 ingress:
   enabled: true
-  annotations: {}
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
   hosts:
-    - host: flask-api.local
+    - host: "flask-api.local"  
       paths:
         - path: /
           pathType: Prefix

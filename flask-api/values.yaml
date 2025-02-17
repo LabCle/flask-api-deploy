@@ -40,6 +40,8 @@ serviceAccount:
 ingress:
   enabled: true
   className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
   hosts:
     - host: "flask-api.local"  
       paths:

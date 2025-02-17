@@ -45,8 +45,9 @@ ingress:
   hosts:
     - host: "flask-api.local"  
       paths:
-        - path: /items(/|$)(.*)
+        - path: /items
           pathType: Prefix
+
 
 
 autoscaling:

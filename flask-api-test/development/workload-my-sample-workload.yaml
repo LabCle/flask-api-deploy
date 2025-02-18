@@ -8,10 +8,10 @@ metadata:
     app.humanitec.io/app-id: flask-api-test
     app.humanitec.io/env-id: development
     app.humanitec.io/org-id: humaniteclab
-  name: teste
+  name: my-sample-workload
 spec:
   dependsOnResources:
-  - resource-c11a9a566061b00f8fad82e96a93d8b5b08ede97
+  - resource-ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
   - resource-ecc1fbdaf305c0033c452e768415d363a9e149c1
   manifests:
   - apiVersion: v1
@@ -19,45 +19,47 @@ spec:
     kind: ConfigMap
     metadata:
       labels:
-        app.kubernetes.io/instance: teste
+        app.kubernetes.io/instance: my-sample-workload
         app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: teste
+        app.kubernetes.io/name: my-sample-workload
         helm.sh/chart: default-module-1.17.6
-      name: teste-configmap-ngnix
+      name: my-sample-workload-configmap-my-sample-container
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
       labels:
-        app.kubernetes.io/instance: teste
+        app.kubernetes.io/instance: my-sample-workload
         app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: teste
+        app.kubernetes.io/name: my-sample-workload
         helm.sh/chart: default-module-1.17.6
-      name: teste
+      name: my-sample-workload
     spec:
       selector:
         matchLabels:
-          app.kubernetes.io/instance: teste
-          app.kubernetes.io/name: teste
+          app.kubernetes.io/instance: my-sample-workload
+          app.kubernetes.io/name: my-sample-workload
       template:
         metadata:
           annotations:
-            checksum/config: e6a09fda851662cb911b75d309fad66a1ceefe39e27e2e0d4c95ee7550eddb67
+            checksum/config: 8b94a42f66004c930c7b82f09720d8589324ac6b4b42cd5e2a3a76f2aeb7abd6
+            humanitec.io/managed-by: Score
+            humanitec.io/workload-artefact-name: my-sample-workload
           labels:
-            app.kubernetes.io/instance: teste
-            app.kubernetes.io/name: teste
+            app.kubernetes.io/instance: my-sample-workload
+            app.kubernetes.io/name: my-sample-workload
         spec:
           containers:
           - envFrom:
             - configMapRef:
-                name: teste-configmap-ngnix
+                name: my-sample-workload-configmap-my-sample-container
             image: nginx:latest
-            name: ngnix
+            name: my-sample-container
             resources:
               limits:
-                cpu: "0.250"
+                cpu: 250m
                 memory: 256Mi
               requests:
-                cpu: "0.025"
+                cpu: 25m
                 memory: 64Mi
           imagePullSecrets: []
           serviceAccount: ""
@@ -66,18 +68,18 @@ spec:
     kind: Service
     metadata:
       labels:
-        app.kubernetes.io/instance: teste
+        app.kubernetes.io/instance: my-sample-workload
         app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: teste
+        app.kubernetes.io/name: my-sample-workload
         helm.sh/chart: default-module-1.17.6
-      name: teste
+      name: my-sample-workload
     spec:
       ports:
       - name: port-default
         port: 8080
         protocol: TCP
       selector:
-        app.kubernetes.io/instance: teste
-        app.kubernetes.io/name: teste
+        app.kubernetes.io/instance: my-sample-workload
+        app.kubernetes.io/name: my-sample-workload
       type: ClusterIP
 status: {}

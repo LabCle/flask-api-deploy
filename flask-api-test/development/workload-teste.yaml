@@ -1,0 +1,83 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Workload
+metadata:
+  annotations:
+    app.humanitec.io/deployment: 1825648833411ce3
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api-test
+    app.humanitec.io/env-id: development
+    app.humanitec.io/org-id: humaniteclab
+  name: teste
+spec:
+  dependsOnResources:
+  - resource-c11a9a566061b00f8fad82e96a93d8b5b08ede97
+  - resource-ecc1fbdaf305c0033c452e768415d363a9e149c1
+  manifests:
+  - apiVersion: v1
+    data: {}
+    kind: ConfigMap
+    metadata:
+      labels:
+        app.kubernetes.io/instance: teste
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: teste
+        helm.sh/chart: default-module-1.17.6
+      name: teste-configmap-ngnix
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app.kubernetes.io/instance: teste
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: teste
+        helm.sh/chart: default-module-1.17.6
+      name: teste
+    spec:
+      selector:
+        matchLabels:
+          app.kubernetes.io/instance: teste
+          app.kubernetes.io/name: teste
+      template:
+        metadata:
+          annotations:
+            checksum/config: e6a09fda851662cb911b75d309fad66a1ceefe39e27e2e0d4c95ee7550eddb67
+          labels:
+            app.kubernetes.io/instance: teste
+            app.kubernetes.io/name: teste
+        spec:
+          containers:
+          - envFrom:
+            - configMapRef:
+                name: teste-configmap-ngnix
+            image: ngnix:latest
+            name: ngnix
+            resources:
+              limits:
+                cpu: "0.250"
+                memory: 256Mi
+              requests:
+                cpu: "0.025"
+                memory: 64Mi
+          imagePullSecrets: []
+          serviceAccount: ""
+          serviceAccountName: ""
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app.kubernetes.io/instance: teste
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: teste
+        helm.sh/chart: default-module-1.17.6
+      name: teste
+    spec:
+      ports:
+      - name: port-default
+        port: 8080
+        protocol: TCP
+      selector:
+        app.kubernetes.io/instance: teste
+        app.kubernetes.io/name: teste
+      type: ClusterIP
+status: {}

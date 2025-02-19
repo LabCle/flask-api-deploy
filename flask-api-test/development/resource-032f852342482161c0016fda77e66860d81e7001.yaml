@@ -13,9 +13,9 @@ metadata:
     app.humanitec.io/app-id: flask-api-test
     app.humanitec.io/env-id: development
     app.humanitec.io/org-id: humaniteclab
-  name: resource-ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
+  name: resource-032f852342482161c0016fda77e66860d81e7001
 spec:
-  configMapName: resource-configmap-ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
+  configMapName: resource-configmap-032f852342482161c0016fda77e66860d81e7001
   dependsOn: []
   driver: builtin://template
   driverInputs:
@@ -25,20 +25,26 @@ spec:
           outputs: 'update: []'
     resource:
       dependencies: []
-      id: my-sample-workload
+      id: imagem-teste
       profile: humanitec/default-module
       spec:
-        annotations:
-          humanitec.io/managed-by: Score
-          humanitec.io/workload-artefact-name: my-sample-workload
         containers:
-          my-sample-container:
-            id: my-sample-container
-            image: nginx:latest
+          flask-api-image-test:
+            files: {}
+            image: clecio/flask-api:latest
+            resources:
+              limits:
+                cpu: "0.250"
+                memory: 256Mi
+              requests:
+                cpu: "0.025"
+                memory: 64Mi
+            variables: {}
+            volume_mounts: {}
   driverType: humanitec/template
-  guresid: ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
-  id: modules.my-sample-workload
-  secretName: resource-secret-ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
+  guresid: 032f852342482161c0016fda77e66860d81e7001
+  id: modules.imagem-teste
+  secretName: resource-secret-032f852342482161c0016fda77e66860d81e7001
   type: workload
-  workloadPatchName: resource-patch-ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
+  workloadPatchName: resource-patch-032f852342482161c0016fda77e66860d81e7001
 status: {}

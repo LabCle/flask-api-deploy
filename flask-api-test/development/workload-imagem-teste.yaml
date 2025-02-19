@@ -8,50 +8,50 @@ metadata:
     app.humanitec.io/app-id: flask-api-test
     app.humanitec.io/env-id: development
     app.humanitec.io/org-id: humaniteclab
-  name: teste
+  name: imagem-teste
 spec:
   dependsOnResources:
-  - resource-c11a9a566061b00f8fad82e96a93d8b5b08ede97
   - resource-ecc1fbdaf305c0033c452e768415d363a9e149c1
+  - resource-032f852342482161c0016fda77e66860d81e7001
   manifests:
   - apiVersion: v1
     data: {}
     kind: ConfigMap
     metadata:
       labels:
-        app.kubernetes.io/instance: teste
+        app.kubernetes.io/instance: imagem-teste
         app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: teste
+        app.kubernetes.io/name: imagem-teste
         helm.sh/chart: default-module-1.17.6
-      name: teste-configmap-ngnix
+      name: imagem-teste-configmap-flask-api-image-test
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
       labels:
-        app.kubernetes.io/instance: teste
+        app.kubernetes.io/instance: imagem-teste
         app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: teste
+        app.kubernetes.io/name: imagem-teste
         helm.sh/chart: default-module-1.17.6
-      name: teste
+      name: imagem-teste
     spec:
       selector:
         matchLabels:
-          app.kubernetes.io/instance: teste
-          app.kubernetes.io/name: teste
+          app.kubernetes.io/instance: imagem-teste
+          app.kubernetes.io/name: imagem-teste
       template:
         metadata:
           annotations:
-            checksum/config: e6a09fda851662cb911b75d309fad66a1ceefe39e27e2e0d4c95ee7550eddb67
+            checksum/config: e2145c65e4f088f2c3d6e5d156ad2b8cdad4fd69f0c73b62919a7825120187c6
           labels:
-            app.kubernetes.io/instance: teste
-            app.kubernetes.io/name: teste
+            app.kubernetes.io/instance: imagem-teste
+            app.kubernetes.io/name: imagem-teste
         spec:
           containers:
           - envFrom:
             - configMapRef:
-                name: teste-configmap-ngnix
-            image: nginx:latest
-            name: ngnix
+                name: imagem-teste-configmap-flask-api-image-test
+            image: clecio/flask-api:latest
+            name: flask-api-image-test
             resources:
               limits:
                 cpu: "0.250"
@@ -66,18 +66,18 @@ spec:
     kind: Service
     metadata:
       labels:
-        app.kubernetes.io/instance: teste
+        app.kubernetes.io/instance: imagem-teste
         app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: teste
+        app.kubernetes.io/name: imagem-teste
         helm.sh/chart: default-module-1.17.6
-      name: teste
+      name: imagem-teste
     spec:
       ports:
       - name: port-default
         port: 8080
         protocol: TCP
       selector:
-        app.kubernetes.io/instance: teste
-        app.kubernetes.io/name: teste
+        app.kubernetes.io/instance: imagem-teste
+        app.kubernetes.io/name: imagem-teste
       type: ClusterIP
 status: {}

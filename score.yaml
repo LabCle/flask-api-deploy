@@ -1,0 +1,14 @@
+apiVersion: score.dev/v1b1
+metadata:
+  name: my-sample-workload
+containers:
+  my-sample-container:
+    image: .
+    variables:
+      REDIS_CONNECTION_STRING: "${resources.my-redis.host}:${resources.my-redis.port},user=${resources.my-redis.username},password=${resources.my-redis.password}"
+      MONGODB_CONNECTION_STRING: "${resources.my-mongodb.connection}"
+resources:
+  my-mongodb:
+    type: mongodb
+  my-redis:
+    type: redis

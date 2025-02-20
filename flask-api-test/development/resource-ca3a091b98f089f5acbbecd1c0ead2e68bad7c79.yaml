@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 18259d168f9c80d7
+    app.humanitec.io/deployment: 1825edeca54f4778
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -16,7 +16,9 @@ metadata:
   name: resource-ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
 spec:
   configMapName: resource-configmap-ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
-  dependsOn: []
+  dependsOn:
+  - resource-0fcae80115e2de3eb4ad7e928a4e6097e1ba8a91
+  - resource-e8bf0472ccecba849feeff1156acef99070e3b91
   driver: builtin://template
   driverInputs:
     driver:
@@ -24,7 +26,9 @@ spec:
         templates:
           outputs: 'update: []'
     resource:
-      dependencies: []
+      dependencies:
+      - ${resources["mongodb.default#modules.my-sample-workload.externals.my-mongodb"].guresid}
+      - ${resources["redis.default#modules.my-sample-workload.externals.my-redis"].guresid}
       id: my-sample-workload
       profile: humanitec/default-module
       spec:
@@ -35,6 +39,9 @@ spec:
           my-sample-container:
             id: my-sample-container
             image: nginx:latest
+            variables:
+              MONGODB_CONNECTION_STRING: $\{externals.my-mongodb.connection}
+              REDIS_CONNECTION_STRING: $\{externals.my-redis.host}:$\{externals.my-redis.port},user=$\{externals.my-redis.username},password=$\{externals.my-redis.password}
   driverType: humanitec/template
   guresid: ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
   id: modules.my-sample-workload

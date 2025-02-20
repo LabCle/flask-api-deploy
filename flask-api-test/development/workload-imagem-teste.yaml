@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 18259d168f9c80d7
+    app.humanitec.io/deployment: 1825edeca54f4778
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api-test
@@ -11,8 +11,8 @@ metadata:
   name: imagem-teste
 spec:
   dependsOnResources:
-  - resource-ecc1fbdaf305c0033c452e768415d363a9e149c1
   - resource-032f852342482161c0016fda77e66860d81e7001
+  - resource-ecc1fbdaf305c0033c452e768415d363a9e149c1
   manifests:
   - apiVersion: v1
     data: {}

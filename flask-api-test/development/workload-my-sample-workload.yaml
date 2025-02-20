@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 18259d168f9c80d7
+    app.humanitec.io/deployment: 1825edeca54f4778
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api-test
@@ -13,6 +13,8 @@ spec:
   dependsOnResources:
   - resource-ca3a091b98f089f5acbbecd1c0ead2e68bad7c79
   - resource-ecc1fbdaf305c0033c452e768415d363a9e149c1
+  - resource-0fcae80115e2de3eb4ad7e928a4e6097e1ba8a91
+  - resource-e8bf0472ccecba849feeff1156acef99070e3b91
   manifests:
   - apiVersion: v1
     data: {}
@@ -49,7 +51,37 @@ spec:
             app.kubernetes.io/name: my-sample-workload
         spec:
           containers:
-          - envFrom:
+          - env:
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_MONGODB_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  key: connection
+                  name: resource-secret-e8bf0472ccecba849feeff1156acef99070e3b91
+            - name: MONGODB_CONNECTION_STRING
+              value: $(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_MONGODB_CONNECTION)
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: host
+                  name: resource-configmap-0fcae80115e2de3eb4ad7e928a4e6097e1ba8a91
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: resource-configmap-0fcae80115e2de3eb4ad7e928a4e6097e1ba8a91
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: resource-secret-0fcae80115e2de3eb4ad7e928a4e6097e1ba8a91
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: resource-secret-0fcae80115e2de3eb4ad7e928a4e6097e1ba8a91
+            - name: REDIS_CONNECTION_STRING
+              value: $(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_HOST):$(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_PORT),user=$(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_USERNAME),password=$(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_PASSWORD)
+            envFrom:
             - configMapRef:
                 name: my-sample-workload-configmap-my-sample-container
             image: nginx:latest

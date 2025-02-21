@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 18264a039f141424
+    app.humanitec.io/deployment: 18264a29daf3f9fd
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -19,6 +19,7 @@ spec:
   dependsOn:
   - resource-0c81260faf30ca1ba74c6e8ee1012b65055ef413
   - resource-45deb4c783b10bc323907e5c352c912a63ef7e13
+  - resource-bde97380e7f38a9a72dadfd5ec4b8d63ec11d1ff
   driver: builtin://template
   driverInputs:
     driver:
@@ -27,6 +28,7 @@ spec:
           outputs: 'update: []'
     resource:
       dependencies:
+      - ${resources["dns.default#modules.flask-api-score.externals.dns-teste"].guresid}
       - ${resources["mongodb.default#modules.flask-api-score.externals.my-mongodb"].guresid}
       - ${resources["redis.default#modules.flask-api-score.externals.my-redis"].guresid}
       id: flask-api-score

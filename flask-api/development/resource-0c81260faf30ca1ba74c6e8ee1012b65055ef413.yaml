@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: hum-rp-mongodb-ex-mongodb
     app.humanitec.io/definition-version-id: e3d90695-ab57-468c-8e7c-14cbb194d5e6
-    app.humanitec.io/deployment: 182643325fa01262
+    app.humanitec.io/deployment: 182648a3bdf496ef
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: f9a9e21b47db0184
     app.humanitec.io/resource-class: default

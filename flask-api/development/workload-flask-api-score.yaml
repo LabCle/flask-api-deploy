@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 182643325fa01262
+    app.humanitec.io/deployment: 182648a3bdf496ef
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -36,10 +36,16 @@ spec:
         helm.sh/chart: default-module-1.17.6
       name: flask-api-score
     spec:
+      minReadySeconds: 5
+      replicas: 3
       selector:
         matchLabels:
           app.kubernetes.io/instance: flask-api-score
           app.kubernetes.io/name: flask-api-score
+      strategy:
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
       template:
         metadata:
           annotations:
@@ -94,6 +100,10 @@ spec:
                 cpu: 25m
                 memory: 64Mi
           imagePullSecrets: []
+          nodeSelector:
+            topology.kubernetes.io/region: europe-west3
+          os:
+            name: linux
           serviceAccount: ""
           serviceAccountName: ""
   - apiVersion: v1

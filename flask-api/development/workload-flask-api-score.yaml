@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 18263a7f8521bee1
+    app.humanitec.io/deployment: 182643325fa01262
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -88,8 +88,11 @@ spec:
             name: flask-api
             resources:
               limits:
-                cpu: 500m
+                cpu: 250m
                 memory: 256Mi
+              requests:
+                cpu: 25m
+                memory: 64Mi
           imagePullSecrets: []
           serviceAccount: ""
           serviceAccountName: ""

@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 18263486ab461aee
+    app.humanitec.io/deployment: 182634cb4a7590ba
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -35,7 +35,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: my-sample-workload
         helm.sh/chart: default-module-1.17.6
-      name: my-sample-workload-configmap-ngnix
+      name: my-sample-workload-configmap-nginx
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -53,7 +53,7 @@ spec:
       template:
         metadata:
           annotations:
-            checksum/config: e7b8bdff5bf917804ce946366533e9c1bad937b68e8f78c467dfcb7cede887b0
+            checksum/config: 95b10f9de245e9606a59654ffd9421e91838c886a35e4c9eeec7b1658161bf55
             humanitec.io/managed-by: Score
             humanitec.io/workload-artefact-name: my-sample-workload
           labels:
@@ -105,9 +105,9 @@ spec:
                 memory: 64Mi
           - envFrom:
             - configMapRef:
-                name: my-sample-workload-configmap-ngnix
-            image: ngnix:latest
-            name: ngnix
+                name: my-sample-workload-configmap-nginx
+            image: nginx:latest
+            name: nginx
             resources:
               limits:
                 cpu: "0.250"

@@ -1,0 +1,63 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/definition-id: default-humanitec-workload-res
+    app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
+    app.humanitec.io/deployment: 182635b406fcc9b9
+    app.humanitec.io/env-type: development
+    app.humanitec.io/matching-criteria-id: db70c377f7134da2
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api
+    app.humanitec.io/env-id: development
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-dbd158e134385faf2ccbb875465a27a1a43db9c2
+spec:
+  configMapName: resource-configmap-dbd158e134385faf2ccbb875465a27a1a43db9c2
+  dependsOn:
+  - resource-3f1bf40f690f55064447323a9ecf734e41b97d53
+  - resource-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
+  driver: builtin://template
+  driverInputs:
+    driver:
+      values:
+        templates:
+          outputs: 'update: []'
+    resource:
+      dependencies:
+      - ${resources["mongodb.default#modules.my-sample-workload.externals.my-mongodb"].guresid}
+      - ${resources["redis.default#modules.my-sample-workload.externals.my-redis"].guresid}
+      id: my-sample-workload
+      profile: humanitec/default-module
+      spec:
+        annotations:
+          humanitec.io/managed-by: Score
+          humanitec.io/workload-artefact-name: my-sample-workload
+        containers:
+          my-sample-container:
+            id: my-sample-container
+            image: clecio/flask-api:latest
+            variables:
+              MONGODB_CONNECTION_STRING: $\{externals.my-mongodb.connection}
+              REDIS_CONNECTION_STRING: $\{externals.my-redis.host}:$\{externals.my-redis.port},user=$\{externals.my-redis.username},password=$\{externals.my-redis.password}
+          nginx:
+            files: {}
+            image: nginx:latest
+            resources:
+              limits:
+                cpu: "0.250"
+                memory: 256Mi
+              requests:
+                cpu: "0.025"
+                memory: 64Mi
+            variables: {}
+            volume_mounts: {}
+  driverType: humanitec/template
+  guresid: dbd158e134385faf2ccbb875465a27a1a43db9c2
+  id: modules.my-sample-workload
+  secretName: resource-secret-dbd158e134385faf2ccbb875465a27a1a43db9c2
+  type: workload
+  workloadPatchName: resource-patch-dbd158e134385faf2ccbb875465a27a1a43db9c2
+status: {}

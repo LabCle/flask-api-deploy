@@ -1,0 +1,139 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Workload
+metadata:
+  annotations:
+    app.humanitec.io/deployment: 182635b406fcc9b9
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api
+    app.humanitec.io/env-id: development
+    app.humanitec.io/org-id: humaniteclab
+  name: my-sample-workload
+spec:
+  dependsOnResources:
+  - resource-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
+  - resource-3f1bf40f690f55064447323a9ecf734e41b97d53
+  - resource-dbd158e134385faf2ccbb875465a27a1a43db9c2
+  - resource-30674c469da41b43a89ff5e5de617fd757804695
+  manifests:
+  - apiVersion: v1
+    data: {}
+    kind: ConfigMap
+    metadata:
+      labels:
+        app.kubernetes.io/instance: my-sample-workload
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: my-sample-workload
+        helm.sh/chart: default-module-1.17.6
+      name: my-sample-workload-configmap-my-sample-container
+  - apiVersion: v1
+    data: {}
+    kind: ConfigMap
+    metadata:
+      labels:
+        app.kubernetes.io/instance: my-sample-workload
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: my-sample-workload
+        helm.sh/chart: default-module-1.17.6
+      name: my-sample-workload-configmap-nginx
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app.kubernetes.io/instance: my-sample-workload
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: my-sample-workload
+        helm.sh/chart: default-module-1.17.6
+      name: my-sample-workload
+    spec:
+      selector:
+        matchLabels:
+          app.kubernetes.io/instance: my-sample-workload
+          app.kubernetes.io/name: my-sample-workload
+      template:
+        metadata:
+          annotations:
+            checksum/config: 95b10f9de245e9606a59654ffd9421e91838c886a35e4c9eeec7b1658161bf55
+            humanitec.io/managed-by: Score
+            humanitec.io/workload-artefact-name: my-sample-workload
+          labels:
+            app.kubernetes.io/instance: my-sample-workload
+            app.kubernetes.io/name: my-sample-workload
+        spec:
+          containers:
+          - env:
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_MONGODB_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  key: connection
+                  name: resource-secret-3f1bf40f690f55064447323a9ecf734e41b97d53
+            - name: MONGODB_CONNECTION_STRING
+              value: $(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_MONGODB_CONNECTION)
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: host
+                  name: resource-configmap-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: resource-configmap-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: resource-secret-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
+            - name: _MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: resource-secret-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
+            - name: REDIS_CONNECTION_STRING
+              value: $(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_HOST):$(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_PORT),user=$(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_USERNAME),password=$(_MODULES.MY_SAMPLE_WORKLOAD.EXTERNALS.MY_REDIS_PASSWORD)
+            envFrom:
+            - configMapRef:
+                name: my-sample-workload-configmap-my-sample-container
+            image: clecio/flask-api:latest
+            name: my-sample-container
+            resources:
+              limits:
+                cpu: 250m
+                memory: 256Mi
+              requests:
+                cpu: 25m
+                memory: 64Mi
+          - envFrom:
+            - configMapRef:
+                name: my-sample-workload-configmap-nginx
+            image: nginx:latest
+            name: nginx
+            resources:
+              limits:
+                cpu: "0.250"
+                memory: 256Mi
+              requests:
+                cpu: "0.025"
+                memory: 64Mi
+          imagePullSecrets: []
+          serviceAccount: ""
+          serviceAccountName: ""
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app.kubernetes.io/instance: my-sample-workload
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: my-sample-workload
+        helm.sh/chart: default-module-1.17.6
+      name: my-sample-workload
+    spec:
+      ports:
+      - name: port-default
+        port: 8080
+        protocol: TCP
+      selector:
+        app.kubernetes.io/instance: my-sample-workload
+        app.kubernetes.io/name: my-sample-workload
+      type: ClusterIP
+status: {}

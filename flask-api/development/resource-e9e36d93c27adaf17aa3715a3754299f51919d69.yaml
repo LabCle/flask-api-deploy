@@ -1,0 +1,51 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/definition-id: default-humanitec-workload-res
+    app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
+    app.humanitec.io/deployment: 182635b406fcc9b9
+    app.humanitec.io/env-type: development
+    app.humanitec.io/matching-criteria-id: db70c377f7134da2
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api
+    app.humanitec.io/env-id: development
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-e9e36d93c27adaf17aa3715a3754299f51919d69
+spec:
+  configMapName: resource-configmap-e9e36d93c27adaf17aa3715a3754299f51919d69
+  dependsOn:
+  - resource-0c81260faf30ca1ba74c6e8ee1012b65055ef413
+  - resource-45deb4c783b10bc323907e5c352c912a63ef7e13
+  driver: builtin://template
+  driverInputs:
+    driver:
+      values:
+        templates:
+          outputs: 'update: []'
+    resource:
+      dependencies:
+      - ${resources["mongodb.default#modules.flask-api-score.externals.my-mongodb"].guresid}
+      - ${resources["redis.default#modules.flask-api-score.externals.my-redis"].guresid}
+      id: flask-api-score
+      profile: humanitec/default-module
+      spec:
+        annotations:
+          humanitec.io/managed-by: Score
+          humanitec.io/workload-artefact-name: flask-api-score
+        containers:
+          my-sample-container:
+            id: my-sample-container
+            image: clecio/flask-api:latest
+            variables:
+              MONGODB_CONNECTION_STRING: $\{externals.my-mongodb.connection}
+              REDIS_CONNECTION_STRING: $\{externals.my-redis.host}:$\{externals.my-redis.port},user=$\{externals.my-redis.username},password=$\{externals.my-redis.password}
+  driverType: humanitec/template
+  guresid: e9e36d93c27adaf17aa3715a3754299f51919d69
+  id: modules.flask-api-score
+  secretName: resource-secret-e9e36d93c27adaf17aa3715a3754299f51919d69
+  type: workload
+  workloadPatchName: resource-patch-e9e36d93c27adaf17aa3715a3754299f51919d69
+status: {}

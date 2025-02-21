@@ -117,7 +117,7 @@ spec:
     spec:
       ports:
       - name: port-default
-        port: 8080
+        port: 5000
         protocol: TCP
       selector:
         app.kubernetes.io/instance: flask-api-score

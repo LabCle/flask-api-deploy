@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 182632848b1c6c83
+    app.humanitec.io/deployment: 18263486ab461aee
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -42,6 +42,18 @@ spec:
             variables:
               MONGODB_CONNECTION_STRING: $\{externals.my-mongodb.connection}
               REDIS_CONNECTION_STRING: $\{externals.my-redis.host}:$\{externals.my-redis.port},user=$\{externals.my-redis.username},password=$\{externals.my-redis.password}
+          ngnix:
+            files: {}
+            image: ngnix:latest
+            resources:
+              limits:
+                cpu: "0.250"
+                memory: 256Mi
+              requests:
+                cpu: "0.025"
+                memory: 64Mi
+            variables: {}
+            volume_mounts: {}
   driverType: humanitec/template
   guresid: dbd158e134385faf2ccbb875465a27a1a43db9c2
   id: modules.my-sample-workload

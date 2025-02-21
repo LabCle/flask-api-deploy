@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 182632848b1c6c83
+    app.humanitec.io/deployment: 18263486ab461aee
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -11,10 +11,10 @@ metadata:
   name: my-sample-workload
 spec:
   dependsOnResources:
+  - resource-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
   - resource-3f1bf40f690f55064447323a9ecf734e41b97d53
   - resource-dbd158e134385faf2ccbb875465a27a1a43db9c2
   - resource-30674c469da41b43a89ff5e5de617fd757804695
-  - resource-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
   manifests:
   - apiVersion: v1
     data: {}
@@ -26,6 +26,16 @@ spec:
         app.kubernetes.io/name: my-sample-workload
         helm.sh/chart: default-module-1.17.6
       name: my-sample-workload-configmap-my-sample-container
+  - apiVersion: v1
+    data: {}
+    kind: ConfigMap
+    metadata:
+      labels:
+        app.kubernetes.io/instance: my-sample-workload
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: my-sample-workload
+        helm.sh/chart: default-module-1.17.6
+      name: my-sample-workload-configmap-ngnix
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -43,7 +53,7 @@ spec:
       template:
         metadata:
           annotations:
-            checksum/config: 8b94a42f66004c930c7b82f09720d8589324ac6b4b42cd5e2a3a76f2aeb7abd6
+            checksum/config: e7b8bdff5bf917804ce946366533e9c1bad937b68e8f78c467dfcb7cede887b0
             humanitec.io/managed-by: Score
             humanitec.io/workload-artefact-name: my-sample-workload
           labels:
@@ -92,6 +102,18 @@ spec:
                 memory: 256Mi
               requests:
                 cpu: 25m
+                memory: 64Mi
+          - envFrom:
+            - configMapRef:
+                name: my-sample-workload-configmap-ngnix
+            image: ngnix:latest
+            name: ngnix
+            resources:
+              limits:
+                cpu: "0.250"
+                memory: 256Mi
+              requests:
+                cpu: "0.025"
                 memory: 64Mi
           imagePullSecrets: []
           serviceAccount: ""

@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 18264999fe3bee92
+    app.humanitec.io/deployment: 182649c9acda10c6
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api

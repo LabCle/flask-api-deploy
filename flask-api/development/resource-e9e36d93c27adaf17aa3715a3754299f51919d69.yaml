@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 182648a3bdf496ef
+    app.humanitec.io/deployment: 1826492361fa6551
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -44,16 +44,11 @@ spec:
               REDIS_CONNECTION_STRING: $\{externals.my-redis.host}:$\{externals.my-redis.port},user=$\{externals.my-redis.username},password=$\{externals.my-redis.password}
         deployment:
           minReadySeconds: 5
-          replicas: 3
+          replicas: 2
           strategy:
             rollingUpdate:
               maxSurge: 1
               maxUnavailable: 0
-        pod:
-          nodeSelector:
-            topology.kubernetes.io/region: europe-west3
-          os:
-            name: linux
   driverType: humanitec/template
   guresid: e9e36d93c27adaf17aa3715a3754299f51919d69
   id: modules.flask-api-score

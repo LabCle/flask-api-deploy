@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 18264a29daf3f9fd
+    app.humanitec.io/deployment: 18264b853c0085fa
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -11,13 +11,10 @@ metadata:
   name: flask-api-score
 spec:
   dependsOnResources:
-  - resource-e9e36d93c27adaf17aa3715a3754299f51919d69
-  - resource-3d36b1eaebd860d73efbcb5733d188716462ba38
   - resource-30674c469da41b43a89ff5e5de617fd757804695
-  - resource-db6fc61cb310b1218a78819261ff67e2ab9275e8
   - resource-45deb4c783b10bc323907e5c352c912a63ef7e13
   - resource-0c81260faf30ca1ba74c6e8ee1012b65055ef413
-  - resource-bde97380e7f38a9a72dadfd5ec4b8d63ec11d1ff
+  - resource-e9e36d93c27adaf17aa3715a3754299f51919d69
   manifests:
   - apiVersion: v1
     data: {}
@@ -117,7 +114,7 @@ spec:
     spec:
       ports:
       - name: port-default
-        port: 5000
+        port: 8080
         protocol: TCP
       selector:
         app.kubernetes.io/instance: flask-api-score

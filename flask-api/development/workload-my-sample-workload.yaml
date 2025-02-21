@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 1825fe04dd9fece7
+    app.humanitec.io/deployment: 1826318a3b922e74
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -11,10 +11,10 @@ metadata:
   name: my-sample-workload
 spec:
   dependsOnResources:
-  - resource-30674c469da41b43a89ff5e5de617fd757804695
   - resource-8b44ff995d9007ddf57dcd7c92754abe40bdd49d
   - resource-3f1bf40f690f55064447323a9ecf734e41b97d53
   - resource-dbd158e134385faf2ccbb875465a27a1a43db9c2
+  - resource-30674c469da41b43a89ff5e5de617fd757804695
   manifests:
   - apiVersion: v1
     data: {}

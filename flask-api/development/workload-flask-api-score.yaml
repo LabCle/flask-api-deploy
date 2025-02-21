@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 182639e2fbfe506c
+    app.humanitec.io/deployment: 18263a7f8521bee1
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -25,7 +25,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: flask-api-score
         helm.sh/chart: default-module-1.17.6
-      name: flask-api-score-configmap-my-sample-container
+      name: flask-api-score-configmap-flask-api
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -43,7 +43,7 @@ spec:
       template:
         metadata:
           annotations:
-            checksum/config: 380fae80808bade838c718e1efaa0622703157ddaabee63a9f9cdb52f45dc6c3
+            checksum/config: ca6bda857ee056f719f7219f6b1f11ab755dbf3cd4eee70498115142386fcd35
             humanitec.io/managed-by: Score
             humanitec.io/workload-artefact-name: flask-api-score
           labels:
@@ -83,16 +83,13 @@ spec:
               value: $(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_HOST):$(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_PORT),user=$(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_USERNAME),password=$(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_PASSWORD)
             envFrom:
             - configMapRef:
-                name: flask-api-score-configmap-my-sample-container
+                name: flask-api-score-configmap-flask-api
             image: clecio/flask-api:latest
-            name: my-sample-container
+            name: flask-api
             resources:
               limits:
-                cpu: 250m
+                cpu: 500m
                 memory: 256Mi
-              requests:
-                cpu: 25m
-                memory: 64Mi
           imagePullSecrets: []
           serviceAccount: ""
           serviceAccountName: ""

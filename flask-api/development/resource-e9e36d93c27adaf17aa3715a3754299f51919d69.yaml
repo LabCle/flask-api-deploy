@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 1826d398c86a6d9c
+    app.humanitec.io/deployment: 1826d4e7aeaf173d
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -45,7 +45,7 @@ spec:
               REDIS_CONNECTION_STRING: $\{externals.my-redis.host}:$\{externals.my-redis.port},user=$\{externals.my-redis.username},password=$\{externals.my-redis.password}
         deployment:
           minReadySeconds: 5
-          replicas: 2
+          replicas: 1
           strategy:
             rollingUpdate:
               maxSurge: 1

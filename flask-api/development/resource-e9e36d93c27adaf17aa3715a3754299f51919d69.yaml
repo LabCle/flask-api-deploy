@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 1826fa3c9f3aec86
+    app.humanitec.io/deployment: 1826fb228fc03be8
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -40,7 +40,7 @@ spec:
             id: flask-api
             image: clecio/flask-api:latest
             variables:
-              MONGO_URI: mongodb://hsreojws:9UwfzIEnmHL9ztzE@mongo-flask-api-score-my-mongodb:27017/mydb
+              MONGO_URI: mongodb://hsreojws:9UwfzIEnmHL9ztzE@mongo-flask-api-score-my-mongodb:27017/mydb?authSource=admin
               MONGODB_CONNECTION_STRING: $\{externals.my-mongodb.connection}
               REDIS_CONNECTION_STRING: $\{externals.my-redis.host}:$\{externals.my-redis.port},user=$\{externals.my-redis.username},password=$\{externals.my-redis.password}
         deployment:

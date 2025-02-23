@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 1826f9fe882114f2
+    app.humanitec.io/deployment: 1826fa3c9f3aec86
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -18,7 +18,7 @@ spec:
   manifests:
   - apiVersion: v1
     data:
-      MONGO_URI: mongodb://mongo:27017/mydb
+      MONGO_URI: mongodb://hsreojws:9UwfzIEnmHL9ztzE@mongo-flask-api-score-my-mongodb:27017/mydb
     kind: ConfigMap
     metadata:
       labels:
@@ -50,7 +50,7 @@ spec:
       template:
         metadata:
           annotations:
-            checksum/config: be4a1d799a504509f5b7389e5801d545ba573e1421ebdb69f83021c8e789597e
+            checksum/config: 9bf17b496f8c21e4be573422523b8d10a33c28e816ec377802b0798ba8e41d67
             humanitec.io/managed-by: Score
             humanitec.io/workload-artefact-name: flask-api-score
           labels:

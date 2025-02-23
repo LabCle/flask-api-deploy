@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 1826d5666e6ee25c
+    app.humanitec.io/deployment: 1826d58556d7529c
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -17,7 +17,8 @@ spec:
   - resource-30674c469da41b43a89ff5e5de617fd757804695
   manifests:
   - apiVersion: v1
-    data: {}
+    data:
+      MONGO_URI: mongodb://mongo:27017/mydb
     kind: ConfigMap
     metadata:
       labels:
@@ -49,7 +50,7 @@ spec:
       template:
         metadata:
           annotations:
-            checksum/config: ca6bda857ee056f719f7219f6b1f11ab755dbf3cd4eee70498115142386fcd35
+            checksum/config: be4a1d799a504509f5b7389e5801d545ba573e1421ebdb69f83021c8e789597e
             humanitec.io/managed-by: Score
             humanitec.io/workload-artefact-name: flask-api-score
           labels:
@@ -65,8 +66,6 @@ spec:
                   name: resource-secret-0c81260faf30ca1ba74c6e8ee1012b65055ef413
             - name: MONGODB_CONNECTION_STRING
               value: $(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_MONGODB_CONNECTION)
-            - name: MONGO_URI
-              value: $(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_MONGODB_CONNECTION)/mydb
             - name: _MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_HOST
               valueFrom:
                 configMapKeyRef:

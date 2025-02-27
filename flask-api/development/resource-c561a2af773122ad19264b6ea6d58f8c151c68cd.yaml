@@ -1,0 +1,32 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/definition-id: default-humanitec-dns
+    app.humanitec.io/definition-version-id: 9a2f5758-82c7-4421-8ccd-ae10972364c3
+    app.humanitec.io/deployment: 182806d3ff040246
+    app.humanitec.io/env-type: development
+    app.humanitec.io/matching-criteria-id: 5d52957634e8c6df
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api
+    app.humanitec.io/env-id: development
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-c561a2af773122ad19264b6ea6d58f8c151c68cd
+spec:
+  configMapName: resource-configmap-c561a2af773122ad19264b6ea6d58f8c151c68cd
+  dependsOn: []
+  driver: https://drivers.humanitec.io/newapp-io-dns
+  driverInputs:
+    driver:
+      values: {}
+    resource:
+      ip_address: 34.69.255.204
+  driverType: humanitec/newapp-io-dns
+  guresid: c561a2af773122ad19264b6ea6d58f8c151c68cd
+  id: modules.flask-api-score.externals.dns
+  secretName: resource-secret-c561a2af773122ad19264b6ea6d58f8c151c68cd
+  type: dns
+  workloadPatchName: resource-patch-c561a2af773122ad19264b6ea6d58f8c151c68cd
+status: {}

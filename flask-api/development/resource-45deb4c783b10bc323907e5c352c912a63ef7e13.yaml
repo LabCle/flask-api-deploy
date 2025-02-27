@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: hum-rp-redis-ex-redis
     app.humanitec.io/definition-version-id: 28aae733-9ee5-404a-ac81-dfeb9b865bd2
-    app.humanitec.io/deployment: 182789c7c3d67362
+    app.humanitec.io/deployment: 182806d3ff040246
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: fb06f9b1e83bc242
     app.humanitec.io/resource-class: default

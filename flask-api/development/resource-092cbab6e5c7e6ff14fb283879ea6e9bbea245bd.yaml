@@ -1,0 +1,30 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/definition-id: default-humanitec-tls-cert
+    app.humanitec.io/definition-version-id: 98da1e0b-4b3c-444d-ab45-9879f3f8df83
+    app.humanitec.io/deployment: 182806d3ff040246
+    app.humanitec.io/env-type: development
+    app.humanitec.io/matching-criteria-id: 7d9259f49d2751ca
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api
+    app.humanitec.io/env-id: development
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-092cbab6e5c7e6ff14fb283879ea6e9bbea245bd
+spec:
+  configMapName: resource-configmap-092cbab6e5c7e6ff14fb283879ea6e9bbea245bd
+  dependsOn: []
+  driver: https://drivers.humanitec.io/newapp-io-tls
+  driverInputs:
+    driver:
+      values: {}
+  driverType: humanitec/newapp-io-tls
+  guresid: 092cbab6e5c7e6ff14fb283879ea6e9bbea245bd
+  id: modules.flask-api-score.externals.dns
+  secretName: resource-secret-092cbab6e5c7e6ff14fb283879ea6e9bbea245bd
+  type: tls-cert
+  workloadPatchName: resource-patch-092cbab6e5c7e6ff14fb283879ea6e9bbea245bd
+status: {}

@@ -1,0 +1,44 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/account: gcp2
+    app.humanitec.io/definition-id: postgres-cloud
+    app.humanitec.io/definition-version-id: ef43b368-c1da-460a-9be5-fc0a756bff29
+    app.humanitec.io/deployment: 182806d3ff040246
+    app.humanitec.io/env-type: development
+    app.humanitec.io/matching-criteria-id: 8c831f437669f921
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api
+    app.humanitec.io/env-id: development
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-7f5b2e35fb73b549ccf9550ecf94e5c3cec12e98
+spec:
+  configMapName: resource-configmap-7f5b2e35fb73b549ccf9550ecf94e5c3cec12e98
+  dependsOn: []
+  driver: https://drivers.humanitec.io/postgres-cloudsql
+  driverInputs:
+    driver:
+      secrets:
+      - remoteRef:
+          key: orgs--humaniteclab--resources--defs--postgres-cloud--driver_secrets--dbcredentials--password
+          version: "1"
+        secretKey: dbcredentials.password
+        secretStoreName: my-gsm
+      - remoteRef:
+          key: orgs--humaniteclab--resources--defs--postgres-cloud--driver_secrets--dbcredentials--username
+          version: "1"
+        secretKey: dbcredentials.username
+        secretStoreName: my-gsm
+      values:
+        instance: humanitec-1:us-central1:postgres
+        name: postgres-cloud
+  driverType: humanitec/postgres-cloudsql
+  guresid: 7f5b2e35fb73b549ccf9550ecf94e5c3cec12e98
+  id: modules.flask-api-score.externals.postgres
+  secretName: resource-secret-7f5b2e35fb73b549ccf9550ecf94e5c3cec12e98
+  type: postgres
+  workloadPatchName: resource-patch-7f5b2e35fb73b549ccf9550ecf94e5c3cec12e98
+status: {}

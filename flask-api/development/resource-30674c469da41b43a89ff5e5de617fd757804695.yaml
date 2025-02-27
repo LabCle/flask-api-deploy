@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-base-env
     app.humanitec.io/definition-version-id: 446c0fce-bef9-4048-ba5b-47e2edaf5903
-    app.humanitec.io/deployment: 182806d3ff040246
+    app.humanitec.io/deployment: 18280ffba6cf521e
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: c72e691130b9c896
     app.humanitec.io/resource-class: default
@@ -22,7 +22,7 @@ spec:
     driver:
       values: {}
     resource:
-      id: /orgs/humaniteclab/apps/flask-api/envs/${context.env.id}
+      id: /orgs/humaniteclab/apps/flask-api/envs/development
   driverType: humanitec/template
   guresid: 30674c469da41b43a89ff5e5de617fd757804695
   id: base-env

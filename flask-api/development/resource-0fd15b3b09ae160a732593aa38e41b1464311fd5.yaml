@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-route
     app.humanitec.io/definition-version-id: 1266f49f-dbc8-4998-bfe1-b2d0f2c31fb8
-    app.humanitec.io/deployment: 182806d3ff040246
+    app.humanitec.io/deployment: 18280ffba6cf521e
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: e1ccf5e735011a72
     app.humanitec.io/resource-class: default
@@ -24,10 +24,10 @@ spec:
       values:
         templates:
           init: |
-            serviceName: {{ if regexMatch `modules\.[a-z0-9-]+\.externals` `${context.res.id}` -}}
-              {{- index (splitList "." `${context.res.id}`) 1 | quote -}}
+            serviceName: {{ if regexMatch `modules\.[a-z0-9-]+\.externals` `modules.flask-api-score.externals.route` -}}
+              {{- index (splitList "." `modules.flask-api-score.externals.route`) 1 | quote -}}
             {{- else -}}
-              {{- fail `A route must be added as a private resource dependency. ID: ${context.res.id}` -}}
+              {{- fail `A route must be added as a private resource dependency. ID: modules.flask-api-score.externals.route` -}}
             {{- end }}
           outputs: |
             host: {{ .resource.host | quote }}

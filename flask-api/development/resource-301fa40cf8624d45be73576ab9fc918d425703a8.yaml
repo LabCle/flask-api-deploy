@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-ingress
     app.humanitec.io/definition-version-id: c7dcce9b-79d4-4236-bf7c-c3643a01dbed
-    app.humanitec.io/deployment: 182806d3ff040246
+    app.humanitec.io/deployment: 18280ffba6cf521e
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: 9c92a2d495b2258e
     app.humanitec.io/resource-class: default
@@ -24,9 +24,9 @@ spec:
   driverInputs:
     driver:
       values:
-        automatic_tls_secret_name: ${resources.tls-cert.outputs.tls_secret_name}
+        automatic_tls_secret_name: ${resources["tls-cert.default#modules.flask-api-score.externals.dns"].outputs.tls_secret_name}
         class: nginx
-        host: ${resources.dns.outputs.host}
+        host: ${resources["dns.default#modules.flask-api-score.externals.dns"].outputs.host}
         templates:
           init: |
             host: {{ .resource.host | default .driver.values.host | quote }}

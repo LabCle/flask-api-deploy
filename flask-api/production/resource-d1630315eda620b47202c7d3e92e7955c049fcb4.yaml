@@ -1,0 +1,32 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/definition-id: default-humanitec-base-env
+    app.humanitec.io/definition-version-id: 446c0fce-bef9-4048-ba5b-47e2edaf5903
+    app.humanitec.io/deployment: 1828236c5870dc16
+    app.humanitec.io/env-type: production
+    app.humanitec.io/matching-criteria-id: c72e691130b9c896
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api
+    app.humanitec.io/env-id: production
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-d1630315eda620b47202c7d3e92e7955c049fcb4
+spec:
+  configMapName: resource-configmap-d1630315eda620b47202c7d3e92e7955c049fcb4
+  dependsOn: []
+  driver: builtin://template
+  driverInputs:
+    driver:
+      values: {}
+    resource:
+      id: /orgs/humaniteclab/apps/flask-api/envs/production
+  driverType: humanitec/template
+  guresid: d1630315eda620b47202c7d3e92e7955c049fcb4
+  id: base-env
+  secretName: resource-secret-d1630315eda620b47202c7d3e92e7955c049fcb4
+  type: base-env
+  workloadPatchName: resource-patch-d1630315eda620b47202c7d3e92e7955c049fcb4
+status: {}

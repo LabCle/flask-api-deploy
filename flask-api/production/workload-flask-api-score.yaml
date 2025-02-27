@@ -1,0 +1,126 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Workload
+metadata:
+  annotations:
+    app.humanitec.io/deployment: 1828236c5870dc16
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: flask-api
+    app.humanitec.io/env-id: production
+    app.humanitec.io/org-id: humaniteclab
+  name: flask-api-score
+spec:
+  dependsOnResources:
+  - resource-d1630315eda620b47202c7d3e92e7955c049fcb4
+  - resource-8dc870414bd6e7d6ac78e45bf463465e647c95f7
+  - resource-8bc709ed2e4a790c58a913aa5147024c42fa84c6
+  - resource-456f71615e82c1e727e8ebacc5e2322914eb1a7d
+  manifests:
+  - apiVersion: v1
+    data: {}
+    kind: ConfigMap
+    metadata:
+      labels:
+        app.kubernetes.io/instance: flask-api-score
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: flask-api-score
+        helm.sh/chart: default-module-1.17.6
+      name: flask-api-score-configmap-flask-api
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app.kubernetes.io/instance: flask-api-score
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: flask-api-score
+        helm.sh/chart: default-module-1.17.6
+      name: flask-api-score
+    spec:
+      minReadySeconds: 5
+      replicas: 1
+      selector:
+        matchLabels:
+          app.kubernetes.io/instance: flask-api-score
+          app.kubernetes.io/name: flask-api-score
+      strategy:
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
+      template:
+        metadata:
+          annotations:
+            checksum/config: ca6bda857ee056f719f7219f6b1f11ab755dbf3cd4eee70498115142386fcd35
+            humanitec.io/managed-by: Score
+            humanitec.io/workload-artefact-name: flask-api-score
+          labels:
+            app.kubernetes.io/instance: flask-api-score
+            app.kubernetes.io/name: flask-api-score
+        spec:
+          containers:
+          - env:
+            - name: _MODULES.FLASK_API_SCORE.EXTERNALS.MY_MONGODB_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  key: connection
+                  name: resource-secret-8bc709ed2e4a790c58a913aa5147024c42fa84c6
+            - name: MONGODB_CONNECTION_STRING
+              value: $(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_MONGODB_CONNECTION)
+            - name: MONGO_URI
+              value: $(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_MONGODB_CONNECTION)mydb?authSource=admin
+            - name: _MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: host
+                  name: resource-configmap-8dc870414bd6e7d6ac78e45bf463465e647c95f7
+            - name: _MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: resource-configmap-8dc870414bd6e7d6ac78e45bf463465e647c95f7
+            - name: _MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: resource-secret-8dc870414bd6e7d6ac78e45bf463465e647c95f7
+            - name: _MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: resource-secret-8dc870414bd6e7d6ac78e45bf463465e647c95f7
+            - name: REDIS_CONNECTION_STRING
+              value: $(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_HOST):$(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_PORT),user=$(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_USERNAME),password=$(_MODULES.FLASK_API_SCORE.EXTERNALS.MY_REDIS_PASSWORD)
+            envFrom:
+            - configMapRef:
+                name: flask-api-score-configmap-flask-api
+            image: clecio/flask-api:latest
+            name: flask-api
+            resources:
+              limits:
+                cpu: 250m
+                memory: 256Mi
+              requests:
+                cpu: 25m
+                memory: 64Mi
+          imagePullSecrets: []
+          serviceAccount: ""
+          serviceAccountName: ""
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app.kubernetes.io/instance: flask-api-score
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: flask-api-score
+        helm.sh/chart: default-module-1.17.6
+      name: flask-api-score
+    spec:
+      ports:
+      - name: port-http
+        port: 5000
+        protocol: TCP
+        targetPort: 5000
+      selector:
+        app.kubernetes.io/instance: flask-api-score
+        app.kubernetes.io/name: flask-api-score
+      type: ClusterIP
+status: {}

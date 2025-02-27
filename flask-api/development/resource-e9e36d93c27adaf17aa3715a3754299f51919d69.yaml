@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 18280ffba6cf521e
+    app.humanitec.io/deployment: "1828100883026927"
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -18,10 +18,7 @@ spec:
   configMapName: resource-configmap-e9e36d93c27adaf17aa3715a3754299f51919d69
   dependsOn:
   - resource-0c81260faf30ca1ba74c6e8ee1012b65055ef413
-  - resource-0fd15b3b09ae160a732593aa38e41b1464311fd5
   - resource-45deb4c783b10bc323907e5c352c912a63ef7e13
-  - resource-7f5b2e35fb73b549ccf9550ecf94e5c3cec12e98
-  - resource-c561a2af773122ad19264b6ea6d58f8c151c68cd
   driver: builtin://template
   driverInputs:
     driver:
@@ -30,11 +27,8 @@ spec:
           outputs: 'update: []'
     resource:
       dependencies:
-      - ${resources["dns.default#modules.flask-api-score.externals.dns"].guresid}
       - ${resources["mongodb.default#modules.flask-api-score.externals.my-mongodb"].guresid}
-      - ${resources["postgres.default#modules.flask-api-score.externals.postgres"].guresid}
       - ${resources["redis.default#modules.flask-api-score.externals.my-redis"].guresid}
-      - ${resources["route.default#modules.flask-api-score.externals.route"].guresid}
       id: flask-api-score
       profile: humanitec/default-module
       spec:

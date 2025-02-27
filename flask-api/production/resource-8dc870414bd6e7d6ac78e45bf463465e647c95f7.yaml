@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: redis-tf
     app.humanitec.io/definition-version-id: 84225461-3cc6-4f9e-91b6-bf26ca7a3661
-    app.humanitec.io/deployment: 182823b3bf276439
+    app.humanitec.io/deployment: 182825670f1e5451
     app.humanitec.io/env-type: production
     app.humanitec.io/matching-criteria-id: a3cd5d191de31812
     app.humanitec.io/resource-class: default

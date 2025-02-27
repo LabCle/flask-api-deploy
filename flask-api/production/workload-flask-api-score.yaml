@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 182823b3bf276439
+    app.humanitec.io/deployment: 182825670f1e5451
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: flask-api
@@ -11,10 +11,10 @@ metadata:
   name: flask-api-score
 spec:
   dependsOnResources:
-  - resource-d1630315eda620b47202c7d3e92e7955c049fcb4
   - resource-8dc870414bd6e7d6ac78e45bf463465e647c95f7
   - resource-8bc709ed2e4a790c58a913aa5147024c42fa84c6
   - resource-456f71615e82c1e727e8ebacc5e2322914eb1a7d
+  - resource-d1630315eda620b47202c7d3e92e7955c049fcb4
   manifests:
   - apiVersion: v1
     data: {}

@@ -2,11 +2,11 @@ apiVersion: humanitec.io/v1alpha1
 kind: Resource
 metadata:
   annotations:
-    app.humanitec.io/definition-id: redis-tf
-    app.humanitec.io/definition-version-id: 84225461-3cc6-4f9e-91b6-bf26ca7a3661
-    app.humanitec.io/deployment: 1828a702dde7a92d
+    app.humanitec.io/definition-id: redis-terrafrom
+    app.humanitec.io/definition-version-id: 28a741cc-5f49-41a8-add7-58a49e830125
+    app.humanitec.io/deployment: 1828a7e3483dcfb2
     app.humanitec.io/env-type: production
-    app.humanitec.io/matching-criteria-id: a3cd5d191de31812
+    app.humanitec.io/matching-criteria-id: 36f8391eb7b04598
     app.humanitec.io/resource-class: default
   creationTimestamp: null
   labels:
@@ -20,7 +20,13 @@ spec:
   driver: https://drivers.humanitec.io/terraform
   driverInputs:
     driver:
-      values: {}
+      values:
+        append_logs_to_error: false
+        credentials_config: {}
+        runner_mode: managed
+        source:
+          path: modules/redis/basic
+          url: https://github.com/humanitec-architecture/resource-packs-gcp
   driverType: humanitec/terraform
   guresid: 8dc870414bd6e7d6ac78e45bf463465e647c95f7
   id: modules.flask-api-score.externals.my-redis

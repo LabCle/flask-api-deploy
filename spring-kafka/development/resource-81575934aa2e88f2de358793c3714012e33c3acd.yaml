@@ -5,7 +5,7 @@ metadata:
     app.humanitec.io/account: gcp2
     app.humanitec.io/definition-id: postgres-cloud
     app.humanitec.io/definition-version-id: ef43b368-c1da-460a-9be5-fc0a756bff29
-    app.humanitec.io/deployment: 182a300d8e121f3d
+    app.humanitec.io/deployment: 182a45c3d2afc804
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: 8c831f437669f921
     app.humanitec.io/resource-class: default
@@ -14,9 +14,9 @@ metadata:
     app.humanitec.io/app-id: spring-kafka
     app.humanitec.io/env-id: development
     app.humanitec.io/org-id: humaniteclab
-  name: resource-6071c4dc2d94a148c4a6c57ce79224b3200961b4
+  name: resource-81575934aa2e88f2de358793c3714012e33c3acd
 spec:
-  configMapName: resource-configmap-6071c4dc2d94a148c4a6c57ce79224b3200961b4
+  configMapName: resource-configmap-81575934aa2e88f2de358793c3714012e33c3acd
   dependsOn: []
   driver: https://drivers.humanitec.io/postgres-cloudsql
   driverInputs:
@@ -36,9 +36,9 @@ spec:
         instance: humanitec-1:us-central1:postgres
         name: postgres-cloud
   driverType: humanitec/postgres-cloudsql
-  guresid: 6071c4dc2d94a148c4a6c57ce79224b3200961b4
-  id: modules.spring-kafka-score.externals.postgres
-  secretName: resource-secret-6071c4dc2d94a148c4a6c57ce79224b3200961b4
+  guresid: 81575934aa2e88f2de358793c3714012e33c3acd
+  id: modules.spring-kafka-score.externals.my-postgres
+  secretName: resource-secret-81575934aa2e88f2de358793c3714012e33c3acd
   type: postgres
-  workloadPatchName: resource-patch-6071c4dc2d94a148c4a6c57ce79224b3200961b4
+  workloadPatchName: resource-patch-81575934aa2e88f2de358793c3714012e33c3acd
 status: {}

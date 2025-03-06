@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 182a300d8e121f3d
+    app.humanitec.io/deployment: 182a45c3d2afc804
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: spring-kafka
@@ -11,13 +11,13 @@ metadata:
   name: spring-kafka-score
 spec:
   dependsOnResources:
+  - resource-0e2afe9b0f59f5d35fd65f9fc6c26ef8571bcfaa
+  - resource-3bda415792bd16ab6f58ea20771d4ad987b03481
   - resource-86fa49e090f254edf84bc526abb550a1c5e7b355
-  - resource-6071c4dc2d94a148c4a6c57ce79224b3200961b4
+  - resource-81575934aa2e88f2de358793c3714012e33c3acd
   - resource-b922605b279d4fab063112cfd1781b95c0445f09
   - resource-f729b99848972009b643187529c9ba9e4c68f1f2
-  - resource-0e2afe9b0f59f5d35fd65f9fc6c26ef8571bcfaa
   - resource-60ed5fe3191fc3fa6473edfd413a5d2a2fb55c36
-  - resource-3bda415792bd16ab6f58ea20771d4ad987b03481
   manifests:
   - apiVersion: v1
     data: {}
@@ -60,7 +60,35 @@ spec:
             app.kubernetes.io/name: spring-kafka-score
         spec:
           containers:
-          - envFrom:
+          - env:
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: resource-secret-81575934aa2e88f2de358793c3714012e33c3acd
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: resource-secret-81575934aa2e88f2de358793c3714012e33c3acd
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: host
+                  name: resource-configmap-81575934aa2e88f2de358793c3714012e33c3acd
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: resource-configmap-81575934aa2e88f2de358793c3714012e33c3acd
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: name
+                  name: resource-configmap-81575934aa2e88f2de358793c3714012e33c3acd
+            - name: POSTGRES_CONNECTION_STRING
+              value: postgresql://$(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_USERNAME)$(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_PASSWORD)@$(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_HOST):$(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_PORT)/$(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.MY_POSTGRES_NAME)
+            envFrom:
             - configMapRef:
                 name: spring-kafka-score-configmap-spring-kafka
             image: clecio/spring-kafka:latest

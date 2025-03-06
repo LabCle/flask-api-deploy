@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-dns
     app.humanitec.io/definition-version-id: 9a2f5758-82c7-4421-8ccd-ae10972364c3
-    app.humanitec.io/deployment: 182a300d8e121f3d
+    app.humanitec.io/deployment: 182a45c3d2afc804
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: 5d52957634e8c6df
     app.humanitec.io/resource-class: default

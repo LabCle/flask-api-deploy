@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 182a300d8e121f3d
+    app.humanitec.io/deployment: 182a45c3d2afc804
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -17,7 +17,7 @@ metadata:
 spec:
   configMapName: resource-configmap-60ed5fe3191fc3fa6473edfd413a5d2a2fb55c36
   dependsOn:
-  - resource-6071c4dc2d94a148c4a6c57ce79224b3200961b4
+  - resource-81575934aa2e88f2de358793c3714012e33c3acd
   - resource-b922605b279d4fab063112cfd1781b95c0445f09
   - resource-f729b99848972009b643187529c9ba9e4c68f1f2
   driver: builtin://template
@@ -29,7 +29,7 @@ spec:
     resource:
       dependencies:
       - ${resources["dns.default#modules.spring-kafka-score.externals.dns"].guresid}
-      - ${resources["postgres.default#modules.spring-kafka-score.externals.postgres"].guresid}
+      - ${resources["postgres.default#modules.spring-kafka-score.externals.my-postgres"].guresid}
       - ${resources["route.default#modules.spring-kafka-score.externals.route"].guresid}
       id: spring-kafka-score
       profile: humanitec/default-module
@@ -41,6 +41,8 @@ spec:
           spring-kafka:
             id: spring-kafka
             image: clecio/spring-kafka:latest
+            variables:
+              POSTGRES_CONNECTION_STRING: postgresql://$\{externals.my-postgres.username}$\{externals.my-postgres.password}@$\{externals.my-postgres.host}:$\{externals.my-postgres.port}/$\{externals.my-postgres.name}
         deployment:
           minReadySeconds: 5
           replicas: 1

@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-route
     app.humanitec.io/definition-version-id: 1266f49f-dbc8-4998-bfe1-b2d0f2c31fb8
-    app.humanitec.io/deployment: 182a2f25db467d51
+    app.humanitec.io/deployment: 182a2f97d3aabcfd
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: e1ccf5e735011a72
     app.humanitec.io/resource-class: default

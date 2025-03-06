@@ -1,0 +1,32 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/definition-id: default-humanitec-dns
+    app.humanitec.io/definition-version-id: 9a2f5758-82c7-4421-8ccd-ae10972364c3
+    app.humanitec.io/deployment: 182a2f25db467d51
+    app.humanitec.io/env-type: development
+    app.humanitec.io/matching-criteria-id: 5d52957634e8c6df
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: spring-kafka
+    app.humanitec.io/env-id: development
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-b922605b279d4fab063112cfd1781b95c0445f09
+spec:
+  configMapName: resource-configmap-b922605b279d4fab063112cfd1781b95c0445f09
+  dependsOn: []
+  driver: https://drivers.humanitec.io/newapp-io-dns
+  driverInputs:
+    driver:
+      values: {}
+    resource:
+      ip_address: 34.69.255.204
+  driverType: humanitec/newapp-io-dns
+  guresid: b922605b279d4fab063112cfd1781b95c0445f09
+  id: modules.spring-kafka-score.externals.dns
+  secretName: resource-secret-b922605b279d4fab063112cfd1781b95c0445f09
+  type: dns
+  workloadPatchName: resource-patch-b922605b279d4fab063112cfd1781b95c0445f09
+status: {}

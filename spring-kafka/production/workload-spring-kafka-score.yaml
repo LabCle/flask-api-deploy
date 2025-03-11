@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 182bd3cdc58cec91
+    app.humanitec.io/deployment: 182bd46721e9df4a
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: spring-kafka

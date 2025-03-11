@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: hum-rp-postgres-ex-gcp-iam-policy-binding-gcp-sa-wi
     app.humanitec.io/definition-version-id: 45ed1912-c84f-420b-8ef2-3388495a11ea
-    app.humanitec.io/deployment: 182bd2867ae9042f
+    app.humanitec.io/deployment: 182bd2d6b12ee6bc
     app.humanitec.io/env-type: production
     app.humanitec.io/matching-criteria-id: a33c1c3ed7314a6
     app.humanitec.io/resource-class: pg-sa-policy

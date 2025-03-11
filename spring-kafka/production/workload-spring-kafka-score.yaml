@@ -2,7 +2,7 @@ apiVersion: humanitec.io/v1alpha1
 kind: Workload
 metadata:
   annotations:
-    app.humanitec.io/deployment: 182bd2867ae9042f
+    app.humanitec.io/deployment: 182bd2d6b12ee6bc
   creationTimestamp: null
   labels:
     app.humanitec.io/app-id: spring-kafka
@@ -11,10 +11,10 @@ metadata:
   name: spring-kafka-score
 spec:
   dependsOnResources:
-  - resource-bf30bcba90ae561fb552931727740d42aef0e50c
   - resource-5949cc79ce5c72f28441610af7ba2bc659132fac
   - resource-80bd716f1b056145bc6710e922565c6aa0417801
   - resource-5997c96354aae1ce6a864ca38c6e31acd544933f
+  - resource-bf30bcba90ae561fb552931727740d42aef0e50c
   manifests:
   - apiVersion: v1
     data: {}

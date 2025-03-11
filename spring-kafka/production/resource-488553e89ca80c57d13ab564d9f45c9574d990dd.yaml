@@ -5,7 +5,7 @@ metadata:
     app.humanitec.io/account: hum-rp-postgres-example
     app.humanitec.io/definition-id: hum-rp-postgres-ex-cloudsql-postgres-instance-basic
     app.humanitec.io/definition-version-id: 54ef8cdd-ecd4-45c5-b653-0ad2f83c75cb
-    app.humanitec.io/deployment: 182bd46721e9df4a
+    app.humanitec.io/deployment: 182bd4cb4bbc6a6d
     app.humanitec.io/env-type: production
     app.humanitec.io/matching-criteria-id: e11fe976cfc4db83
     app.humanitec.io/resource-class: default

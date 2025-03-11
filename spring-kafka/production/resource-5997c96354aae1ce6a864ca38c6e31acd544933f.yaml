@@ -1,0 +1,32 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/definition-id: default-humanitec-base-env
+    app.humanitec.io/definition-version-id: 446c0fce-bef9-4048-ba5b-47e2edaf5903
+    app.humanitec.io/deployment: 182bd2867ae9042f
+    app.humanitec.io/env-type: production
+    app.humanitec.io/matching-criteria-id: c72e691130b9c896
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: spring-kafka
+    app.humanitec.io/env-id: production
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-5997c96354aae1ce6a864ca38c6e31acd544933f
+spec:
+  configMapName: resource-configmap-5997c96354aae1ce6a864ca38c6e31acd544933f
+  dependsOn: []
+  driver: builtin://template
+  driverInputs:
+    driver:
+      values: {}
+    resource:
+      id: /orgs/humaniteclab/apps/spring-kafka/envs/production
+  driverType: humanitec/template
+  guresid: 5997c96354aae1ce6a864ca38c6e31acd544933f
+  id: base-env
+  secretName: resource-secret-5997c96354aae1ce6a864ca38c6e31acd544933f
+  type: base-env
+  workloadPatchName: resource-patch-5997c96354aae1ce6a864ca38c6e31acd544933f
+status: {}

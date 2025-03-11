@@ -1,0 +1,130 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Workload
+metadata:
+  annotations:
+    app.humanitec.io/deployment: 182bd2867ae9042f
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: spring-kafka
+    app.humanitec.io/env-id: production
+    app.humanitec.io/org-id: humaniteclab
+  name: spring-kafka-score
+spec:
+  dependsOnResources:
+  - resource-bf30bcba90ae561fb552931727740d42aef0e50c
+  - resource-5949cc79ce5c72f28441610af7ba2bc659132fac
+  - resource-80bd716f1b056145bc6710e922565c6aa0417801
+  - resource-5997c96354aae1ce6a864ca38c6e31acd544933f
+  manifests:
+  - apiVersion: v1
+    data: {}
+    kind: ConfigMap
+    metadata:
+      labels:
+        app.kubernetes.io/instance: spring-kafka-score
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: spring-kafka-score
+        helm.sh/chart: default-module-1.17.6
+      name: spring-kafka-score-configmap-spring-kafka
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app.kubernetes.io/instance: spring-kafka-score
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: spring-kafka-score
+        helm.sh/chart: default-module-1.17.6
+      name: spring-kafka-score
+    spec:
+      minReadySeconds: 5
+      replicas: 1
+      selector:
+        matchLabels:
+          app.kubernetes.io/instance: spring-kafka-score
+          app.kubernetes.io/name: spring-kafka-score
+      strategy:
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
+      template:
+        metadata:
+          annotations:
+            checksum/config: 6ba20073d48421829fec70d7b8670f762588d9a63bba2d9c3b95988a5a6cbf88
+            humanitec.io/managed-by: Score
+            humanitec.io/workload-artefact-name: spring-kafka-score
+          labels:
+            app.kubernetes.io/instance: spring-kafka-score
+            app.kubernetes.io/name: spring-kafka-score
+        spec:
+          containers:
+          - env:
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: host
+                  name: resource-configmap-bf30bcba90ae561fb552931727740d42aef0e50c
+            - name: DB_HOST
+              value: $(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_HOST)
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: name
+                  name: resource-configmap-bf30bcba90ae561fb552931727740d42aef0e50c
+            - name: DB_NAME
+              value: $(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_NAME)resources
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: resource-secret-bf30bcba90ae561fb552931727740d42aef0e50c
+            - name: DB_PASSWORD
+              value: $(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_PASSWORD)
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: resource-configmap-bf30bcba90ae561fb552931727740d42aef0e50c
+            - name: DB_PORT
+              value: $(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_PORT)
+            - name: _MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: resource-secret-bf30bcba90ae561fb552931727740d42aef0e50c
+            - name: DB_USERNAME
+              value: $(_MODULES.SPRING_KAFKA_SCORE.EXTERNALS.DB_USERNAME)
+            envFrom:
+            - configMapRef:
+                name: spring-kafka-score-configmap-spring-kafka
+            image: clecio/spring-kafka:latest
+            name: spring-kafka
+            resources:
+              limits:
+                cpu: 250m
+                memory: 256Mi
+              requests:
+                cpu: 25m
+                memory: 64Mi
+          imagePullSecrets: []
+          serviceAccount: ""
+          serviceAccountName: ""
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app.kubernetes.io/instance: spring-kafka-score
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: spring-kafka-score
+        helm.sh/chart: default-module-1.17.6
+      name: spring-kafka-score
+    spec:
+      ports:
+      - name: port-http
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+      selector:
+        app.kubernetes.io/instance: spring-kafka-score
+        app.kubernetes.io/name: spring-kafka-score
+      type: ClusterIP
+status: {}

@@ -1,0 +1,39 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/definition-id: hum-rp-postgres-ex-gcp-iam-policy-binding-gcp-sa-wi
+    app.humanitec.io/definition-version-id: 45ed1912-c84f-420b-8ef2-3388495a11ea
+    app.humanitec.io/deployment: 182bd2867ae9042f
+    app.humanitec.io/env-type: production
+    app.humanitec.io/matching-criteria-id: a33c1c3ed7314a6
+    app.humanitec.io/resource-class: pg-sa-policy
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: spring-kafka
+    app.humanitec.io/env-id: production
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-5949cc79ce5c72f28441610af7ba2bc659132fac
+spec:
+  configMapName: resource-configmap-5949cc79ce5c72f28441610af7ba2bc659132fac
+  dependsOn:
+  - resource-bf30bcba90ae561fb552931727740d42aef0e50c
+  driver: builtin://template
+  driverInputs:
+    driver:
+      values:
+        templates:
+          outputs: |
+            binding: |
+              {{ dict
+                "type" "service_account"
+                "service_account_id" "${resources["postgres.default#modules.spring-kafka-score.externals.db"].outputs.service_account_id}"
+                "role" "roles/iam.workloadIdentityUser"
+              | toJson }}
+  driverType: humanitec/template
+  guresid: 5949cc79ce5c72f28441610af7ba2bc659132fac
+  id: modules.spring-kafka-score.externals.db
+  secretName: resource-secret-5949cc79ce5c72f28441610af7ba2bc659132fac
+  type: gcp-iam-policy-binding
+  workloadPatchName: resource-patch-5949cc79ce5c72f28441610af7ba2bc659132fac
+status: {}

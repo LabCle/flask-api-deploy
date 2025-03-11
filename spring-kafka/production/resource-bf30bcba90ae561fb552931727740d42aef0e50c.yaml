@@ -1,0 +1,52 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/account: hum-rp-postgres-example
+    app.humanitec.io/definition-id: hum-rp-postgres-ex-cloudsql-postgres-workload-identity
+    app.humanitec.io/definition-version-id: c9171658-7536-4a07-8bdc-958d64225ae6
+    app.humanitec.io/deployment: 182bd2867ae9042f
+    app.humanitec.io/env-type: production
+    app.humanitec.io/matching-criteria-id: 6b67ae656f5a8a12
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: spring-kafka
+    app.humanitec.io/env-id: production
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-bf30bcba90ae561fb552931727740d42aef0e50c
+spec:
+  configMapName: resource-configmap-bf30bcba90ae561fb552931727740d42aef0e50c
+  dependsOn:
+  - resource-488553e89ca80c57d13ab564d9f45c9574d990dd
+  driver: https://drivers.humanitec.io/terraform
+  driverInputs:
+    driver:
+      values:
+        append_logs_to_error: true
+        credentials_config:
+          environment:
+            GOOGLE_CREDENTIALS: '*'
+        manifests_output: manifests
+        source:
+          path: modules/cloudsql/workload-identity
+          rev: refs/heads/main
+          url: https://github.com/humanitec-architecture/resource-packs-gcp.git
+        variables:
+          app_id: spring-kafka
+          env_id: production
+          host: ${resources["postgres-instance.default#pg-instance"].outputs.host}
+          instance: ${resources["postgres-instance.default#pg-instance"].outputs.instance}
+          instance_connection_name: ${resources["postgres-instance.default#pg-instance"].outputs.connection_name}
+          name: ""
+          port: ${resources["postgres-instance.default#pg-instance"].outputs.port}
+          project: humanitec-1
+          region: us-central1
+          res_id: modules.spring-kafka-score.externals.db
+  driverType: humanitec/terraform
+  guresid: bf30bcba90ae561fb552931727740d42aef0e50c
+  id: modules.spring-kafka-score.externals.db
+  secretName: resource-secret-bf30bcba90ae561fb552931727740d42aef0e50c
+  type: postgres
+  workloadPatchName: resource-patch-bf30bcba90ae561fb552931727740d42aef0e50c
+status: {}

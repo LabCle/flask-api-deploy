@@ -1,0 +1,51 @@
+apiVersion: humanitec.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    app.humanitec.io/account: hum-rp-postgres-example
+    app.humanitec.io/definition-id: hum-rp-postgres-ex-cloudsql-postgres-instance-basic
+    app.humanitec.io/definition-version-id: 54ef8cdd-ecd4-45c5-b653-0ad2f83c75cb
+    app.humanitec.io/deployment: 182bd2867ae9042f
+    app.humanitec.io/env-type: production
+    app.humanitec.io/matching-criteria-id: e11fe976cfc4db83
+    app.humanitec.io/resource-class: default
+  creationTimestamp: null
+  labels:
+    app.humanitec.io/app-id: spring-kafka
+    app.humanitec.io/env-id: production
+    app.humanitec.io/org-id: humaniteclab
+  name: resource-488553e89ca80c57d13ab564d9f45c9574d990dd
+spec:
+  configMapName: resource-configmap-488553e89ca80c57d13ab564d9f45c9574d990dd
+  dependsOn: []
+  driver: https://drivers.humanitec.io/terraform
+  driverInputs:
+    driver:
+      values:
+        append_logs_to_error: true
+        credentials_config:
+          environment:
+            GOOGLE_CREDENTIALS: '*'
+        source:
+          path: modules/cloudsql-instance/basic
+          rev: refs/heads/main
+          url: https://github.com/humanitec-architecture/resource-packs-gcp.git
+        variables:
+          app_id: spring-kafka
+          database_version: POSTGRES_15
+          env_id: production
+          name: ""
+          port: 5432
+          prefix: hum-rp-postgres-ex-
+          private_network: projects/humanitec-1/global/networks/default
+          project: humanitec-1
+          region: us-central1
+          res_id: pg-instance
+          tier: db-f1-micro
+  driverType: humanitec/terraform
+  guresid: 488553e89ca80c57d13ab564d9f45c9574d990dd
+  id: pg-instance
+  secretName: resource-secret-488553e89ca80c57d13ab564d9f45c9574d990dd
+  type: postgres-instance
+  workloadPatchName: resource-patch-488553e89ca80c57d13ab564d9f45c9574d990dd
+status: {}

@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 182a45c3d2afc804
+    app.humanitec.io/deployment: 182bd7b57ba5164f
     app.humanitec.io/env-type: development
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -17,9 +17,7 @@ metadata:
 spec:
   configMapName: resource-configmap-60ed5fe3191fc3fa6473edfd413a5d2a2fb55c36
   dependsOn:
-  - resource-81575934aa2e88f2de358793c3714012e33c3acd
-  - resource-b922605b279d4fab063112cfd1781b95c0445f09
-  - resource-f729b99848972009b643187529c9ba9e4c68f1f2
+  - resource-7a3a76d6d5e573822db4fc2bdb00757fcfeb5244
   driver: builtin://template
   driverInputs:
     driver:
@@ -28,9 +26,7 @@ spec:
           outputs: 'update: []'
     resource:
       dependencies:
-      - ${resources["dns.default#modules.spring-kafka-score.externals.dns"].guresid}
-      - ${resources["postgres.default#modules.spring-kafka-score.externals.my-postgres"].guresid}
-      - ${resources["route.default#modules.spring-kafka-score.externals.route"].guresid}
+      - ${resources["postgres.default#modules.spring-kafka-score.externals.db"].guresid}
       id: spring-kafka-score
       profile: humanitec/default-module
       spec:
@@ -42,7 +38,11 @@ spec:
             id: spring-kafka
             image: clecio/spring-kafka:latest
             variables:
-              POSTGRES_CONNECTION_STRING: postgresql://$\{externals.my-postgres.username}$\{externals.my-postgres.password}@$\{externals.my-postgres.host}:$\{externals.my-postgres.port}/$\{externals.my-postgres.name}
+              DB_HOST: $\{externals.db.host}
+              DB_NAME: $\{externals.db.name}resources
+              DB_PASSWORD: $\{externals.db.password}
+              DB_PORT: $\{externals.db.port}
+              DB_USERNAME: $\{externals.db.username}
         deployment:
           minReadySeconds: 5
           replicas: 1

@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.humanitec.io/definition-id: default-humanitec-workload-res
     app.humanitec.io/definition-version-id: 018b6a0c-91b8-43aa-b130-5114d0d71d45
-    app.humanitec.io/deployment: 182bd4cb4bbc6a6d
+    app.humanitec.io/deployment: 182c049332f03aaa
     app.humanitec.io/env-type: production
     app.humanitec.io/matching-criteria-id: db70c377f7134da2
     app.humanitec.io/resource-class: default
@@ -37,7 +37,7 @@ spec:
         containers:
           spring-kafka:
             id: spring-kafka
-            image: clecio/spring-kafka:latest
+            image: clecio/spring-kafka-app:latest
             variables:
               DB_HOST: $\{externals.db.host}
               DB_NAME: $\{externals.db.name}resources
